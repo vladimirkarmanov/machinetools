@@ -1,6 +1,4 @@
 #!/bin/bash
-rsync -av --exclude='.vscode' --exclude='.git' --exclude='.idea' --exclude='venv' --exclude='.gitignore' \
-          --exclude='node_modules' --exclude='package-lock.json' --exclude='package.json' \
-          --exclude='.pytest_cache' --exclude='requirements-dev.txt' --exclude='db.sqlite3' \
-          --exclude='__pycache__' --exclude='sync.sh' --exclude='gulpfile.js' \
-          /home/vladimir/projects/impuls root@109.234.38.203:/home/projects
+rsync -avzP --exclude='.vscode' --exclude='.git' --exclude='.idea' --exclude='venv' --exclude='.gitignore' \
+          --exclude='__pycache__' --exclude='sync.sh' \
+          -e ssh /home/vladimir/projects/diplom root@212.109.195.15:/home/projects

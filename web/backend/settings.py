@@ -1,10 +1,14 @@
 import os
+import environ
+
+env = environ.Env()
+env.read_env(env_file='dev.env')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'n@g#s648od1pm#5k4p!5z#1+$gt=c)$30#8^=y3soaw4#n!vr!'
+SECRET_KEY = env.str('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -15,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'machinetools.apps.MachinetoolsConfig'
 ]
 
 MIDDLEWARE = [
@@ -53,11 +58,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'diplom',
-        'USER': 'postgres',
-        'PASSWORD': 'a92f18b6939b',
-        'HOST':  '127.0.0.1',
-        'PORT': 5432
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
+        'HOST':  env.str('DB_HOST'),
+        'PORT': env.int('DB_PORT')
     }
 }
 

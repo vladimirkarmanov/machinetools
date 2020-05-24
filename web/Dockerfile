@@ -7,8 +7,8 @@ ENV PYTHONUNBUFFERED 1
 ENV APP_HOME=/home/app/src
 
 RUN apk update \
-    && apk add --virtual .build-deps gcc python3-dev postgresql-dev \
-    && apk add --no-cache
+    && apk add --virtual .build-deps gcc g++ python3-dev musl-dev \
+    && apk add --no-cache --update postgresql-dev libpq zlib-dev jpeg-dev
 
 RUN pip install --upgrade pip setuptools
 

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Станки
+{% endblock title %}
+
+
+{% block navbar %}
+<div class="dropdown mr-3">
+    <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        Фильтр
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">По мощности</a>
+        <a class="dropdown-item" href="#">По частоте вращения</a>
+    </div>
+</div>
+<form class="form-inline my-2 my-lg-0" action="{{ stanok_list }}" method="GET">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Поиск станков" aria-label="Search"
+           value={{ search_value }}>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Поиск</button>
+</form>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for stanok in page %}
+        <div class="col mb-4">
+            <div class="card">
+
+                {% if stanok.images.count != 0 %}
+                <img src="{{ stanok.images.all.0.image.url }}" width="100%" height="200px" class="card-img-top"
+                     alt="Станок">
+                {% else %}
+                <img src="{% static 'img/img-not-found.png' %}" width="100%" height="200px" class="card-img-top"
+                     alt="Станок">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ stanok.name }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ stanok.group }}</small></p>
+                    <a class="btn btn-info" href="{{ stanok.get_absolute_url }}">
+                        Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="Page navigation example">
+        {% if page.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% for i in page.paginator.page_range %}
+
+            {% if i > page.number|add:-4 and i < page.number|add:4 %}
+            <li class="{% if page.number == i %} active {% endif %} page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
+{% endblock content %}

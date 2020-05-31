@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Оснастки
+{% endblock title %}
+
+
+{% block navbar %}
+<form class="form-inline my-2 my-lg-0" action="{{ stanok_list }}" method="GET">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Поиск оснасток" aria-label="Search"
+           value={{ search_value }}>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Поиск</button>
+</form>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for rigging in page %}
+        <div class="col mb-4">
+            <div class="card">
+
+                {% if rigging.images.count != 0 %}
+                <img src="{{ rigging.images.all.0.image.url }}" width="100%" height="200px" class="card-img-top"
+                     alt="Станок">
+                {% else %}
+                <img src="{% static 'img/img-not-found.png' %}" width="100%" height="200px" class="card-img-top"
+                     alt="Станок">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ rigging.name }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ rigging.rigging_type.name }}</small></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="Page navigation example">
+        {% if page.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% for i in page.paginator.page_range %}
+
+            {% if i > page.number|add:-4 and i < page.number|add:4 %}
+            <li class="{% if page.number == i %} active {% endif %} page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Инструменты
+{% endblock title %}
+
+{% block navbar %}
+<div class="dropdown mr-3">
+    <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        Фильтр
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">По виду обрабатываемой детали</a>
+        <a class="dropdown-item" href="#">По области применения</a>
+    </div>
+</div>
+<form class="form-inline my-2 my-lg-0" action="{{ stanok_list }}" method="GET">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Поиск инструментов" aria-label="Search"
+           value={{ search_value }}>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Поиск</button>
+</form>
+{% endblock navbar %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for instrument in page %}
+        <div class="col mb-4">
+            <div class="card">
+
+                {% if instrument.images.count != 0 %}
+                <img src="{{ instrument.images.all.0.image.url }}" width="100%" height="200px" class="card-img-top"
+                     alt="Инструмент">
+                {% else %}
+                <img src="{% static 'img/img-not-found.png' %}" width="100%" height="200px" class="card-img-top"
+                     alt="Инструмент">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ instrument.name }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ instrument.workpiece_type.name }}</small></p>
+                    <p class="card-text"><small class="text-muted">{{ instrument.application_area.name }}</small></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="Page navigation example">
+        {% if page.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% for i in page.paginator.page_range %}
+
+            {% if i > page.number|add:-4 and i < page.number|add:4 %}
+            <li class="{% if page.number == i %} active {% endif %} page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
+{% endblock content %}

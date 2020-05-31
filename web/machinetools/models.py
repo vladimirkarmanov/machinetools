@@ -1,8 +1,10 @@
 from django.db import models
+from django.urls import reverse
 
 
 class StanokGroup(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
+    description = models.TextField(max_length=2000, null=True, verbose_name='Описание')
 
     def __str__(self):
         return self.name
@@ -13,7 +15,7 @@ class StanokGroup(models.Model):
 
 
 class Stanok(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название')
+    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
     group = models.ForeignKey(StanokGroup,
                               on_delete=models.SET_NULL,
                               null=True,
@@ -26,6 +28,9 @@ class Stanok(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('stanok_detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Станок'
@@ -78,7 +83,7 @@ class ApplicationArea(models.Model):
 
 
 class Instrument(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название')
+    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
     workpiece_type = models.ForeignKey(WorkpieceType,
                                        on_delete=models.SET_NULL,
                                        null=True,
@@ -127,3 +132,44 @@ class Manual(models.Model):
     class Meta:
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
+
+
+class RiggingType(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Вид оснастки'
+        verbose_name_plural = 'Виды оснасток'
+
+
+class Rigging(models.Model):
+    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
+    rigging_type = models.ForeignKey(RiggingType,
+                                     on_delete=models.SET_NULL,
+                                     null=True,
+                                     verbose_name='Вид оснастки')
+    description = models.TextField(max_length=2000, null=True, verbose_name='Описание')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Оснастка'
+        verbose_name_plural = 'Оснастки'
+
+
+class RiggingImage(models.Model):
+    rigging = models.ForeignKey(Rigging,
+                                on_delete=models.CASCADE,
+                                related_name='images')
+    image = models.ImageField(blank=True, null=True, verbose_name='Изображение')
+
+    def __str__(self):
+        return self.image.name
+
+    class Meta:
+        verbose_name = 'Изображение оснастки'
+        verbose_name_plural = 'Изображения оснастки'

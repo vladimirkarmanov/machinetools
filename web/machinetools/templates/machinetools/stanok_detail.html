@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ object.name }}
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h1>{{ object.name }}</h1>
+    <div>
+        <p>Группа: {{ object.group.name }}</p>
+        <p>Мощность, кВт: {{ object.power }}</p>
+        <p>Частота вращения, Об/мин: {{ object.rotation_frequency }}</p>
+        <p>Конус шпинделя: {{ object.spindle_cone }}</p>
+        <p>Крутящий момент, Н*м: {{ object.torque }}</p>
+    </div>
+
+    {% for img in object.images.all %}
+    <img src="{{ img.image.url }}" width="100%" alt="Станок">
+    {% endfor %}
+
+    <p>Описание: {{ object.description }}</p>
+
+</div>
+{% endblock content %}

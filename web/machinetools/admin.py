@@ -3,7 +3,8 @@ from django.contrib import admin
 from .models import (
     StanokImage, Stanok, InstrumentImage,
     Instrument, ApplicationArea, ProcessingType,
-    WorkpieceType, StanokGroup, Manual)
+    WorkpieceType, StanokGroup, Manual, Rigging, RiggingImage, RiggingType
+)
 
 
 class StanokImageInline(admin.TabularInline):
@@ -32,6 +33,19 @@ class InstrumentAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description']
 
 
+class RiggingImageInline(admin.TabularInline):
+    model = RiggingImage
+    extra = 2
+
+
+class RiggingAdmin(admin.ModelAdmin):
+    inlines = [RiggingImageInline]
+    list_display = ['name', 'rigging_type']
+    list_display_links = ['name']
+    list_filter = ['rigging_type']
+    search_fields = ['name', 'description']
+
+
 admin.site.register(StanokGroup)
 admin.site.register(Stanok, StanokAdmin)
 
@@ -41,3 +55,6 @@ admin.site.register(WorkpieceType)
 admin.site.register(Instrument, InstrumentAdmin)
 
 admin.site.register(Manual)
+
+admin.site.register(RiggingType)
+admin.site.register(Rigging, RiggingAdmin)

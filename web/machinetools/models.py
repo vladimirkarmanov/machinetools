@@ -1,3 +1,4 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
 
@@ -39,7 +40,9 @@ class Stanok(models.Model):
 
 class StanokImage(models.Model):
     stanok = models.ForeignKey(Stanok, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(blank=True, null=True, verbose_name='Изображение')
+    image = models.ImageField(blank=True, null=True, upload_to='stanok/',
+                              validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
+                              verbose_name='Изображение')
 
     def __str__(self):
         return self.image.name
@@ -112,7 +115,9 @@ class InstrumentImage(models.Model):
     instrument = models.ForeignKey(Instrument,
                                    on_delete=models.CASCADE,
                                    related_name='images')
-    image = models.ImageField(blank=True, null=True, verbose_name='Изображение')
+    image = models.ImageField(blank=True, null=True, upload_to='instrument/',
+                              validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
+                              verbose_name='Изображение')
 
     def __str__(self):
         return self.image.name
@@ -165,7 +170,9 @@ class RiggingImage(models.Model):
     rigging = models.ForeignKey(Rigging,
                                 on_delete=models.CASCADE,
                                 related_name='images')
-    image = models.ImageField(blank=True, null=True, verbose_name='Изображение')
+    image = models.ImageField(blank=True, null=True, upload_to='rigging/',
+                              validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
+                              verbose_name='Изображение')
 
     def __str__(self):
         return self.image.name

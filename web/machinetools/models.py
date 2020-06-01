@@ -132,7 +132,7 @@ class InstrumentImage(models.Model):
 
 class Manual(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
-    file = models.FileField(blank=True, null=True, upload_to='manual/', verbose_name='Файл')
+    file = models.FileField(upload_to='manual/', verbose_name='Файл')
 
     def __str__(self):
         return self.name

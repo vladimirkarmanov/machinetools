@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView, View
 
-from .models import Stanok, Instrument, Rigging
+from .models import Stanok, Instrument, Rigging, Manual
 from .services import (
     get_stanok_list_by_search_query,
     get_instrument_list_by_search_query,
-    get_rigging_list_by_search_query
+    get_rigging_list_by_search_query,
+    get_manual_list_by_search_query
 )
 from .utils import get_objects_page
 
@@ -79,3 +80,20 @@ class RiggingListView(View):
 class RiggingDetailView(DetailView):
     model = Rigging
     template_name = 'machinetools/rigging_detail.html'
+
+
+class ManualListView(View):
+    model = Manual
+    template_name = 'machinetools/manual_list.html'
+
+    def get(self, request):
+        search_query = request.GET.get('search', '')
+        if search_query:
+            manual_list = get_manual_list_by_search_query(search_query)
+        else:
+            manual_list = self.model.objects.order_by('name')
+
+        page_number = request.GET.get('page', 1)
+        page = get_objects_page(manual_list, 9, page_number)
+
+        return render(request, self.template_name, {'search_value': search_query, 'page': page})

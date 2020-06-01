@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Справочники
+{% endblock title %}
+
+{% block navbar %}
+<form class="form-inline my-2 my-lg-0" action="{{ stanok_list }}" method="GET">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Поиск справочников" aria-label="Search"
+           value={{ search_value }}>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Поиск</button>
+</form>
+{% endblock navbar %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3">
+        <div class="list-group">
+            {% for manual in page %}
+            <a href="{{ manual.file.url }}" class="list-group-item list-group-item-action">{{ manual.name|truncatechars:40 }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="Page navigation example">
+        {% if page.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% for i in page.paginator.page_range %}
+
+            {% if i > page.number|add:-4 and i < page.number|add:4 %}
+            <li class="{% if page.number == i %} active {% endif %} page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
+{% endblock content %}

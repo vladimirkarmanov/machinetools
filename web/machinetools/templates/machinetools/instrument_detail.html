@@ -16,15 +16,10 @@
         <p><b>Область применения:</b> {{ object.application_area.name }}</p>
     </div>
 
-    {% for img in object.images.all %}
-    <img src="{{ img.image.url }}" width="100%" alt="Инструмент">
-    {% endfor %}
+    {% include 'machinetools/includes/images-loop.html' %}
 
     <div>
-        {% for file in object.files.all %}
-        <b>Файлы:</b>
-        <a href="{{ file.url }}">{{ file.name }}</a>
-        {% endfor %}
+        {% include 'machinetools/includes/files-loop.html' %}
     </div>
 
     <p><b>Описание:</b> {{ object.description }}</p>

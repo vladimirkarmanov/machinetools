@@ -1,0 +1,6 @@
+<form class="form-inline my-2 my-lg-0" action="{{ request.path }}" method="GET">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Поиск" aria-label="Search"
+           value={{ search_value }}>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Поиск</button>
+</form>

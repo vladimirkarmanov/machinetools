@@ -18,34 +18,23 @@
         <a class="dropdown-item" href="#">По области применения</a>
     </div>
 </div>
-<form class="form-inline my-2 my-lg-0" action="{{ stanok_list }}" method="GET">
-    {% csrf_token %}
-    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Поиск инструментов" aria-label="Search"
-           value={{ search_value }}>
-    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Поиск</button>
-</form>
+{% include 'machinetools/includes/search-form.html' %}
 {% endblock navbar %}
 
 {% block content %}
 <div class="container mt-5">
     <div class="row row-cols-1 row-cols-md-3">
-        {% for instrument in page %}
+        {% for object in page %}
         <div class="col mb-4">
             <div class="card">
 
-                {% if instrument.images.count != 0 %}
-                <img src="{{ instrument.images.all.0.image.url }}" width="100%" height="250px" class="card-img-top"
-                     alt="Инструмент">
-                {% else %}
-                <img src="{% static 'img/img-not-found.png' %}" width="100%" height="250px" class="card-img-top"
-                     alt="Инструмент">
-                {% endif %}
+                {% include 'machinetools/includes/card-image.html' %}
 
                 <div class="card-body">
-                    <h5 class="card-title">{{ instrument.name }}</h5>
-                    <p class="card-text"><small class="text-muted">{{ instrument.workpiece_type.name }}</small></p>
-                    <p class="card-text"><small class="text-muted">{{ instrument.application_area.name }}</small></p>
-                    <a class="btn btn-info" href="{{ instrument.get_absolute_url }}">
+                    <h5 class="card-title">{{ object.name }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ object.workpiece_type.name }}</small></p>
+                    <p class="card-text"><small class="text-muted">{{ object.application_area.name }}</small></p>
+                    <a class="btn btn-info" href="{{ object.get_absolute_url }}">
                         Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
                     </a>
                 </div>
@@ -55,21 +44,6 @@
     </div>
 </div>
 
-<div class="container">
-    <nav aria-label="Page navigation example">
-        {% if page.has_other_pages %}
-        <ul class="pagination justify-content-center">
-            {% for i in page.paginator.page_range %}
+{% include 'machinetools/includes/pagination.html' %}
 
-            {% if i > page.number|add:-4 and i < page.number|add:4 %}
-            <li class="{% if page.number == i %} active {% endif %} page-item">
-                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-            </li>
-            {% endif %}
-
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </nav>
-</div>
 {% endblock content %}

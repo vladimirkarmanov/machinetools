@@ -14,9 +14,11 @@
         <p><b>Вид оснастки:</b> {{ object.rigging_type.name }}</p>
     </div>
 
-    {% for img in object.images.all %}
-    <img src="{{ img.image.url }}" width="100%" alt="Станок">
-    {% endfor %}
+    <div>
+        {% include 'machinetools/includes/files-loop.html' %}
+    </div>
+
+    {% include 'machinetools/includes/images-loop.html' %}
 
     <p><b>Описание:</b> {{ object.description }}</p>
 

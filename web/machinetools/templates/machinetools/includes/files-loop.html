@@ -1,0 +1,4 @@
+{% for file in object.files.all %}
+<b>Файлы:</b>
+<a href="{{ file.url }}">{{ file.name }}</a>
+{% endfor %}

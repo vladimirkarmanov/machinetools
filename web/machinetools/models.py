@@ -106,6 +106,9 @@ class Instrument(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('instrument_detail', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = 'Инструмент'
         verbose_name_plural = 'Инструменты'

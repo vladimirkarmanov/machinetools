@@ -54,6 +54,11 @@ class InstrumentListView(View):
         return render(request, self.template_name, {'search_value': search_query, 'page': page})
 
 
+class InstrumentDetailView(DetailView):
+    model = Instrument
+    template_name = 'machinetools/instrument_detail.html'
+
+
 class RiggingListView(View):
     model = Rigging
     template_name = 'machinetools/rigging_list.html'

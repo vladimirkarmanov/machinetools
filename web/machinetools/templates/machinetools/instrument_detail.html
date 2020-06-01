@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ object.name }}
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h1>{{ object.name }}</h1>
+    <div>
+        <p><b>Вид обрабатываемой детали: </b> {{ object.workpiece_type }}</p>
+        <p><b>Вид обработки:</b> {{ object.processing_type }}</p>
+        <p><b>Область применения:</b> {{ object.application_area }}</p>
+    </div>
+
+    {% for img in object.images.all %}
+    <img src="{{ img.image.url }}" width="100%" alt="Инструмент">
+    {% endfor %}
+
+    <div>
+        {% if object.file1 %}
+        <b>Файл 1:</b>
+        <a href="{{ object.file1.url }}">{{ object.file1.name }}</a>
+        {% endif %}
+
+        {% if object.file2 %}
+        <b>Файл 2:</b>
+        <a href="{{ object.file2.url }}">{{ object.file2.name }}</a>
+        {% endif %}
+    </div>
+
+    <p><b>Описание:</b> {{ object.description }}</p>
+
+</div>
+{% endblock content %}

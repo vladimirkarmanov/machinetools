@@ -45,6 +45,9 @@
                     <h5 class="card-title">{{ instrument.name }}</h5>
                     <p class="card-text"><small class="text-muted">{{ instrument.workpiece_type.name }}</small></p>
                     <p class="card-text"><small class="text-muted">{{ instrument.application_area.name }}</small></p>
+                    <a class="btn btn-info" href="{{ instrument.get_absolute_url }}">
+                        Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                    </a>
                 </div>
             </div>
         </div>

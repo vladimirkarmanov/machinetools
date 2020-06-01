@@ -24,6 +24,8 @@ class StanokListView(View):
         search_query = request.GET.get('search', '')
         if search_query:
             stanok_list = get_stanok_list_by_search_query(search_query)
+        elif order := request.GET.get('order'):
+            stanok_list = self.model.objects.order_by(order)
         else:
             stanok_list = self.model.objects.order_by('group__name')
 

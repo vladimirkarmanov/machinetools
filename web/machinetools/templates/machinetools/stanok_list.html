@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block title %}
 Станки
 {% endblock title %}
@@ -10,13 +8,10 @@
 {% block navbar %}
 <div class="dropdown mr-3">
     <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-       aria-haspopup="true" aria-expanded="false">
-        Фильтр
-    </a>
-
+       aria-haspopup="true" aria-expanded="false">Отсортировать</a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">По мощности</a>
-        <a class="dropdown-item" href="#">По частоте вращения</a>
+        <a class="dropdown-item" href="{% url 'stanok_list' %}?order=power">По мощности</a>
+        <a class="dropdown-item" href="{% url 'stanok_list' %}?order=rotation_frequency">По частоте вращения</a>
     </div>
 </div>
 {% include 'machinetools/includes/search-form.html' %}

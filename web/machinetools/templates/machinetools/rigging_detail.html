@@ -11,11 +11,7 @@
 
     <h1>{{ object.name }}</h1>
     <div>
-        <p><b>Группа:</b> {{ object.group.name }}</p>
-        <p><b>Мощность, кВт:</b> {{ object.power }}</p>
-        <p><b>Частота вращения, Об/мин:</b> {{ object.rotation_frequency }}</p>
-        <p><b>Конус шпинделя:</b> {{ object.spindle_cone }}</p>
-        <p><b>Крутящий момент, Н*м:</b> {{ object.torque }}</p>
+        <p><b>Вид оснастки:</b> {{ object.rigging_type.name }}</p>
     </div>
 
     {% for img in object.images.all %}

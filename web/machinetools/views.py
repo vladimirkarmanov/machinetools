@@ -8,7 +8,7 @@ from .services import (
     get_instrument_list_by_search_query,
     get_rigging_list_by_search_query
 )
-from .utils import get_posts_page
+from .utils import get_objects_page
 
 
 class IndexView(TemplateView):
@@ -27,7 +27,7 @@ class StanokListView(View):
             stanok_list = self.model.objects.order_by('group__name')
 
         page_number = request.GET.get('page', 1)
-        page = get_posts_page(stanok_list, 9, page_number)
+        page = get_objects_page(stanok_list, 9, page_number)
 
         return render(request, self.template_name, {'search_value': search_query, 'page': page})
 
@@ -49,7 +49,7 @@ class InstrumentListView(View):
             instrument_list = self.model.objects.order_by('name')
 
         page_number = request.GET.get('page', 1)
-        page = get_posts_page(instrument_list, 9, page_number)
+        page = get_objects_page(instrument_list, 9, page_number)
 
         return render(request, self.template_name, {'search_value': search_query, 'page': page})
 
@@ -71,6 +71,11 @@ class RiggingListView(View):
             rigging_list = self.model.objects.order_by('rigging_type__name')
 
         page_number = request.GET.get('page', 1)
-        page = get_posts_page(rigging_list, 9, page_number)
+        page = get_objects_page(rigging_list, 9, page_number)
 
         return render(request, self.template_name, {'search_value': search_query, 'page': page})
+
+
+class RiggingDetailView(DetailView):
+    model = Rigging
+    template_name = 'machinetools/rigging_detail.html'

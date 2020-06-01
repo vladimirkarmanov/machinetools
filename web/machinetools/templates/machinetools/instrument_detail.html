@@ -11,9 +11,9 @@
 
     <h1>{{ object.name }}</h1>
     <div>
-        <p><b>Вид обрабатываемой детали: </b> {{ object.workpiece_type }}</p>
-        <p><b>Вид обработки:</b> {{ object.processing_type }}</p>
-        <p><b>Область применения:</b> {{ object.application_area }}</p>
+        <p><b>Вид обрабатываемой детали: </b> {{ object.workpiece_type.name }}</p>
+        <p><b>Вид обработки:</b> {{ object.processing_type.name }}</p>
+        <p><b>Область применения:</b> {{ object.application_area.name }}</p>
     </div>
 
     {% for img in object.images.all %}

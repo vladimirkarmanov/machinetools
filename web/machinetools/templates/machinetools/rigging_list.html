@@ -35,6 +35,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ rigging.name }}</h5>
                     <p class="card-text"><small class="text-muted">{{ rigging.rigging_type.name }}</small></p>
+                    <a class="btn btn-info" href="{{ rigging.get_absolute_url }}">
+                        Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                    </a>
                 </div>
             </div>
         </div>

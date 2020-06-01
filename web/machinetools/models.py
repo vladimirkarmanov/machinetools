@@ -100,8 +100,8 @@ class Instrument(models.Model):
                                          null=True,
                                          verbose_name='Область применения')
     description = models.TextField(max_length=2000, verbose_name='Описание')
-    file1 = models.FileField(blank=True, null=True, verbose_name='Файл 1')
-    file2 = models.FileField(blank=True, null=True, verbose_name='Файл 2')
+    file1 = models.FileField(blank=True, null=True, upload_to='instrument/', verbose_name='Файл 1')
+    file2 = models.FileField(blank=True, null=True, upload_to='instrument/', verbose_name='Файл 2')
 
     def __str__(self):
         return self.name
@@ -132,7 +132,7 @@ class InstrumentImage(models.Model):
 
 class Manual(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
-    file = models.FileField(blank=True, null=True, verbose_name='Файл')
+    file = models.FileField(blank=True, null=True, upload_to='manual/', verbose_name='Файл')
 
     def __str__(self):
         return self.name

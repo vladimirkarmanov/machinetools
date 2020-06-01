@@ -100,8 +100,6 @@ class Instrument(models.Model):
                                          null=True,
                                          verbose_name='Область применения')
     description = models.TextField(max_length=2000, verbose_name='Описание')
-    file1 = models.FileField(blank=True, null=True, upload_to='instrument/', verbose_name='Файл 1')
-    file2 = models.FileField(blank=True, null=True, upload_to='instrument/', verbose_name='Файл 2')
 
     def __str__(self):
         return self.name
@@ -112,6 +110,20 @@ class Instrument(models.Model):
     class Meta:
         verbose_name = 'Инструмент'
         verbose_name_plural = 'Инструменты'
+
+
+class InstrumentFile(models.Model):
+    instrument = models.ForeignKey(Instrument,
+                                   on_delete=models.CASCADE,
+                                   related_name='files')
+    file = models.FileField(blank=True, null=True, upload_to='instrument/', verbose_name='Файл')
+
+    def __str__(self):
+        return self.file.name
+
+    class Meta:
+        verbose_name = 'Файл инструмента'
+        verbose_name_plural = 'Файлы инструмента'
 
 
 class InstrumentImage(models.Model):
@@ -170,6 +182,20 @@ class Rigging(models.Model):
     class Meta:
         verbose_name = 'Оснастка'
         verbose_name_plural = 'Оснастки'
+
+
+class RiggingFile(models.Model):
+    rigging = models.ForeignKey(Rigging,
+                                on_delete=models.CASCADE,
+                                related_name='files')
+    file = models.FileField(blank=True, null=True, upload_to='rigging/', verbose_name='Файл')
+
+    def __str__(self):
+        return self.file.name
+
+    class Meta:
+        verbose_name = 'Файл оснастки'
+        verbose_name_plural = 'Файлы оснастки'
 
 
 class RiggingImage(models.Model):

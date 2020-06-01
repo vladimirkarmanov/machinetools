@@ -21,15 +21,10 @@
     {% endfor %}
 
     <div>
-        {% if object.file1 %}
-        <b>Файл 1:</b>
-        <a href="{{ object.file1.url }}">{{ object.file1.name }}</a>
-        {% endif %}
-
-        {% if object.file2 %}
-        <b>Файл 2:</b>
-        <a href="{{ object.file2.url }}">{{ object.file2.name }}</a>
-        {% endif %}
+        {% for file in object.files.all %}
+        <b>Файлы:</b>
+        <a href="{{ file.url }}">{{ file.name }}</a>
+        {% endfor %}
     </div>
 
     <p><b>Описание:</b> {{ object.description }}</p>

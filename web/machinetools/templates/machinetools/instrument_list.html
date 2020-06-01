@@ -34,10 +34,10 @@
             <div class="card">
 
                 {% if instrument.images.count != 0 %}
-                <img src="{{ instrument.images.all.0.image.url }}" width="100%" height="200px" class="card-img-top"
+                <img src="{{ instrument.images.all.0.image.url }}" width="100%" height="250px" class="card-img-top"
                      alt="Инструмент">
                 {% else %}
-                <img src="{% static 'img/img-not-found.png' %}" width="100%" height="200px" class="card-img-top"
+                <img src="{% static 'img/img-not-found.png' %}" width="100%" height="250px" class="card-img-top"
                      alt="Инструмент">
                 {% endif %}
 

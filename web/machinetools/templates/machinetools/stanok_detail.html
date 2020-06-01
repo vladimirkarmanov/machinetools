@@ -18,6 +18,13 @@
         <p><b>Крутящий момент, Н*м:</b> {{ object.torque }}</p>
     </div>
 
+    <div>
+        {% for file in object.files.all %}
+        <b>Файлы:</b>
+        <a href="{{ file.url }}">{{ file.name }}</a>
+        {% endfor %}
+    </div>
+
     {% for img in object.images.all %}
     <img src="{{ img.image.url }}" width="100%" alt="Станок">
     {% endfor %}

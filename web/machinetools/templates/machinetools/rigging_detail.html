@@ -8,17 +8,17 @@
 <div class="container mt-5">
 
     <h1>{{ object.name }}</h1>
-    <div>
-        <p><b>Вид оснастки:</b> {{ object.rigging_type.name }}</p>
-    </div>
+    <hr>
+    <p><b>Вид оснастки:</b> {{ object.rigging_type.name }}</p>
 
     <div>
         {% include 'machinetools/includes/files-loop.html' %}
     </div>
+    <hr>
 
     {% include 'machinetools/includes/images-loop.html' %}
 
-    <p><b>Описание:</b> {{ object.description }}</p>
+    <p class="mt-4"><b>Описание:</b> {{ object.description }}</p>
 
 </div>
 {% endblock content %}

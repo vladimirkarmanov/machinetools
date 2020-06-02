@@ -19,26 +19,28 @@
 
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row row-cols-1 row-cols-md-3">
-        {% for object in page %}
-        <div class="col mb-4">
-            <div class="card">
+<section class="album py-5 bg-light">
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for object in page %}
+            <div class="col mb-4">
+                <div class="card mb-4 box-shadow">
 
-                {% include 'machinetools/includes/card-image.html' %}
+                    {% include 'machinetools/includes/card-image.html' %}
 
-                <div class="card-body">
-                    <h5 class="card-title">{{ object.name }}</h5>
-                    <p class="card-text"><small class="text-muted">{{ object.group }}</small></p>
-                    <a class="btn btn-info" href="{{ object.get_absolute_url }}">
-                        Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
-                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.name }}</h5>
+                        <p class="card-text"><small class="text-muted">{{ object.group }}</small></p>
+                        <a class="btn btn-info" href="{{ object.get_absolute_url }}">
+                            Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
+</section>
 
 {% include 'machinetools/includes/pagination.html' %}
 

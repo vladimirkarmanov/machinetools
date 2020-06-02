@@ -9,15 +9,17 @@
 {% endblock navbar %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row row-cols-1 row-cols-md-3">
-        <div class="list-group">
-            {% for manual in page %}
-            <a href="{{ manual.file.url }}" class="list-group-item list-group-item-action">{{ manual.name|truncatechars:40 }}</a>
-            {% endfor %}
+<section class="album py-5">
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-3">
+            <div class="list-group">
+                {% for manual in page %}
+                <a href="{{ manual.file.url }}" class="list-group-item list-group-item-action">{{ manual.name|truncatechars:40 }}</a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 {% include 'machinetools/includes/pagination.html' %}
 

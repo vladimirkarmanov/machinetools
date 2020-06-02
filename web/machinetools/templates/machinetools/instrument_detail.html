@@ -8,11 +8,11 @@
 <div class="container mt-5">
 
     <h1>{{ object.name }}</h1>
-    <div>
-        <p><b>Вид обрабатываемой детали: </b> {{ object.workpiece_type.name }}</p>
-        <p><b>Вид обработки:</b> {{ object.processing_type.name }}</p>
-        <p><b>Область применения:</b> {{ object.application_area.name }}</p>
-    </div>
+    <hr>
+    <p><b>Вид обрабатываемой детали: </b> {{ object.workpiece_type.name }}</p>
+    <p><b>Вид обработки:</b> {{ object.processing_type.name }}</p>
+    <p><b>Область применения:</b> {{ object.application_area.name }}</p>
+    <hr>
 
     {% include 'machinetools/includes/images-loop.html' %}
 
@@ -20,7 +20,7 @@
         {% include 'machinetools/includes/files-loop.html' %}
     </div>
 
-    <p><b>Описание:</b> {{ object.description }}</p>
+    <p class="mt-4"><b>Описание:</b> {{ object.description }}</p>
 
 </div>
 {% endblock content %}

@@ -142,18 +142,6 @@ class InstrumentImage(models.Model):
         verbose_name_plural = 'Изображения инструмента'
 
 
-class Manual(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
-    file = models.FileField(upload_to='manual/', verbose_name='Файл')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Справочник'
-        verbose_name_plural = 'Справочники'
-
-
 class RiggingType(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
 
@@ -212,3 +200,15 @@ class RiggingImage(models.Model):
     class Meta:
         verbose_name = 'Изображение оснастки'
         verbose_name_plural = 'Изображения оснастки'
+
+
+class Manual(models.Model):
+    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
+    file = models.FileField(upload_to='manual/', verbose_name='Файл')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Справочник'
+        verbose_name_plural = 'Справочники'

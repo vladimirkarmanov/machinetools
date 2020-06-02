@@ -6,7 +6,7 @@
 
             {% if i > page.number|add:-4 and i < page.number|add:4 %}
             <li class="{% if page.number == i %} active {% endif %} page-item">
-                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                <a class="page-link" href="?page={{ i }}&order={{ order }}">{{ i }}</a>
             </li>
             {% endif %}
 

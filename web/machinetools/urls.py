@@ -1,13 +1,13 @@
 from django.urls import path
 
 from .views import (
-    IndexView, StanokListView, InstrumentListView,
+    MainPageView, StanokListView, InstrumentListView,
     RiggingListView, StanokDetailView, InstrumentDetailView,
     RiggingDetailView, ManualListView
 )
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='index_page'),
+    path('', MainPageView.as_view(), name='main_page'),
 
     path('stanok/<slug:pk>/', StanokDetailView.as_view(), name='stanok_detail'),
     path('stanok/', StanokListView.as_view(), name='stanok_list'),

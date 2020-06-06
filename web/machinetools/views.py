@@ -10,8 +10,8 @@ from .services import (
 )
 
 
-class IndexView(TemplateView):
-    template_name = 'machinetools/index.html'
+class MainPageView(TemplateView):
+    template_name = 'machinetools/main_page.html'
 
 
 class StanokListView(ListViewMixin, ListView):

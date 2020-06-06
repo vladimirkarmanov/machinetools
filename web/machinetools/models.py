@@ -2,17 +2,19 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
 
+from machinetools.utils import compress_image
+
 
 class StanokGroup(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
     description = models.TextField(max_length=2000, null=True, verbose_name='Описание')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = 'Группа станков'
         verbose_name_plural = 'Группы станков'
+
+    def __str__(self):
+        return self.name
 
 
 class Stanok(models.Model):
@@ -27,15 +29,15 @@ class Stanok(models.Model):
     torque = models.FloatField(verbose_name='Крутящий момент, Н*м')
     description = models.TextField(max_length=2000, verbose_name='Описание')
 
+    class Meta:
+        verbose_name = 'Станок'
+        verbose_name_plural = 'Станки'
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('stanok_detail', kwargs={'pk': self.pk})
-
-    class Meta:
-        verbose_name = 'Станок'
-        verbose_name_plural = 'Станки'
 
 
 class StanokImage(models.Model):
@@ -44,45 +46,50 @@ class StanokImage(models.Model):
                               validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
                               verbose_name='Изображение')
 
-    def __str__(self):
-        return self.image.name
-
     class Meta:
         verbose_name = 'Изображение станка'
         verbose_name_plural = 'Изображения станка'
+
+    def __str__(self):
+        return self.image.name
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = compress_image(self.image)
+        super().save(*args, **kwargs)
 
 
 class WorkpieceType(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = 'Вид обрабатываемой детали'
         verbose_name_plural = 'Виды обрабатываемой детали'
+
+    def __str__(self):
+        return self.name
 
 
 class ProcessingType(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = 'Вид обработки'
         verbose_name_plural = 'Виды обработок'
+
+    def __str__(self):
+        return self.name
 
 
 class ApplicationArea(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = 'Область применения'
         verbose_name_plural = 'Области применения'
+
+    def __str__(self):
+        return self.name
 
 
 class Instrument(models.Model):
@@ -101,15 +108,15 @@ class Instrument(models.Model):
                                          verbose_name='Область применения')
     description = models.TextField(max_length=2000, verbose_name='Описание')
 
+    class Meta:
+        verbose_name = 'Инструмент'
+        verbose_name_plural = 'Инструменты'
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('instrument_detail', kwargs={'pk': self.pk})
-
-    class Meta:
-        verbose_name = 'Инструмент'
-        verbose_name_plural = 'Инструменты'
 
 
 class InstrumentFile(models.Model):
@@ -118,12 +125,12 @@ class InstrumentFile(models.Model):
                                    related_name='files')
     file = models.FileField(blank=True, null=True, upload_to='instrument/', verbose_name='Файл')
 
-    def __str__(self):
-        return self.file.name
-
     class Meta:
         verbose_name = 'Файл инструмента'
         verbose_name_plural = 'Файлы инструмента'
+
+    def __str__(self):
+        return self.file.name
 
 
 class InstrumentImage(models.Model):
@@ -134,23 +141,28 @@ class InstrumentImage(models.Model):
                               validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
                               verbose_name='Изображение')
 
-    def __str__(self):
-        return self.image.name
-
     class Meta:
         verbose_name = 'Изображение инструмента'
         verbose_name_plural = 'Изображения инструмента'
+
+    def __str__(self):
+        return self.image.name
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = compress_image(self.image)
+        super().save(*args, **kwargs)
 
 
 class RiggingType(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = 'Вид оснастки'
         verbose_name_plural = 'Виды оснасток'
+
+    def __str__(self):
+        return self.name
 
 
 class Rigging(models.Model):
@@ -161,15 +173,15 @@ class Rigging(models.Model):
                                      verbose_name='Вид оснастки')
     description = models.TextField(max_length=2000, null=True, verbose_name='Описание')
 
+    class Meta:
+        verbose_name = 'Оснастка'
+        verbose_name_plural = 'Оснастки'
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('rigging_detail', kwargs={'pk': self.pk})
-
-    class Meta:
-        verbose_name = 'Оснастка'
-        verbose_name_plural = 'Оснастки'
 
 
 class RiggingFile(models.Model):
@@ -178,12 +190,12 @@ class RiggingFile(models.Model):
                                 related_name='files')
     file = models.FileField(blank=True, null=True, upload_to='rigging/', verbose_name='Файл')
 
-    def __str__(self):
-        return self.file.name
-
     class Meta:
         verbose_name = 'Файл оснастки'
         verbose_name_plural = 'Файлы оснастки'
+
+    def __str__(self):
+        return self.file.name
 
 
 class RiggingImage(models.Model):
@@ -194,21 +206,26 @@ class RiggingImage(models.Model):
                               validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
                               verbose_name='Изображение')
 
-    def __str__(self):
-        return self.image.name
-
     class Meta:
         verbose_name = 'Изображение оснастки'
         verbose_name_plural = 'Изображения оснастки'
+
+    def __str__(self):
+        return self.image.name
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = compress_image(self.image)
+        super().save(*args, **kwargs)
 
 
 class Manual(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
     file = models.FileField(upload_to='manual/', verbose_name='Файл')
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
+
+    def __str__(self):
+        return self.name

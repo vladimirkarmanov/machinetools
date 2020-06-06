@@ -1,8 +1,8 @@
 from django.views.generic import DetailView, TemplateView, ListView
 
-from .mixins import ListViewMixin
-from .models import Stanok, Instrument, Rigging, Manual
-from .services import (
+from machinetools.mixins import ListViewMixin
+from machinetools.models import Stanok, Instrument, Rigging, Manual
+from machinetools.services import (
     get_stanok_list_by_search_query,
     get_instrument_list_by_search_query,
     get_rigging_list_by_search_query,
@@ -67,3 +67,27 @@ class InstrumentDetailView(DetailView):
 class RiggingDetailView(DetailView):
     model = Rigging
     template_name = 'machinetools/rigging_detail.html'
+
+
+class CalculatorView(TemplateView):
+    template_name = 'machinetools/calculator.html'
+
+
+class TurningCalculatorView(TemplateView):
+    """Точение"""
+    template_name = 'machinetools/calculators/turning.html'
+
+
+class DrillingCalculatorView(TemplateView):
+    """Сверление"""
+    template_name = 'machinetools/calculators/drilling.html'
+
+
+class BoringCalculatorView(TemplateView):
+    """Растачивание"""
+    template_name = 'machinetools/calculators/boring.html'
+
+
+class MillingCalculatorView(TemplateView):
+    """Фрезерование"""
+    template_name = 'machinetools/calculators/milling.html'

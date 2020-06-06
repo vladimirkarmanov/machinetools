@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Калькулятор
+{% endblock title %}
+
+
+{% block content %}
+<section class="album py-5">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="card mb-4 box-shadow">
+                    <img src="{% static 'img/turning.jpg' %}" height="400px" width="100%" class="card-img-top"
+                         alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Точение</h5>
+                        <a class="btn btn-info" href="{% url 'turning' %}">
+                            Открыть <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mb-4">
+                <div class="card mb-4 box-shadow">
+                    <img src="{% static 'img/drilling.jpg' %}" height="400px" width="100%" class="card-img-top"
+                         alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Сверление</h5>
+                        <a class="btn btn-info" href="{% url 'drilling' %}">
+                            Открыть <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mb-4">
+                <div class="card mb-4 box-shadow">
+                    <img src="{% static 'img/boring.jpg' %}" height="400px" width="100%" class="card-img-top"
+                         alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Растачивание</h5>
+                        <a class="btn btn-info" href="{% url 'boring' %}">
+                            Открыть <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mb-4">
+                <div class="card mb-4 box-shadow">
+                    <img src="{% static 'img/milling.jpg' %}" height="400px" width="100%" class="card-img-top"
+                         alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Фрезерование</h5>
+                        <a class="btn btn-info" href="{% url 'milling' %}">
+                            Открыть <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

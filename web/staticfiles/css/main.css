@@ -22,3 +22,7 @@ body {
     overflow-x: hidden;
     background-color: #f8f9fa;
 }
+
+#calc-form input {
+    width: 285px!important;
+}

@@ -18,9 +18,11 @@ class ListViewMixin:
         elif order in self.orders:
             object_list = self.model.objects.order_by(order)
         else:
-            order = self.default_order
-            object_list = self.model.objects.order_by(order)
+            object_list = self.model.objects.all()
 
         page_number = request.GET.get('page', 1)
         page = get_objects_page(object_list, self.obj_per_page, page_number)
         return render(request, self.template_name, {'order': order, 'search_value': search_query, 'page': page})
+
+    def get_queryset_by_search_query(self, search_query):
+        raise NotImplementedError

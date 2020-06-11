@@ -12,6 +12,7 @@ class StanokGroup(models.Model):
     class Meta:
         verbose_name = 'Группа станков'
         verbose_name_plural = 'Группы станков'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -32,6 +33,7 @@ class Stanok(models.Model):
     class Meta:
         verbose_name = 'Станок'
         verbose_name_plural = 'Станки'
+        ordering = ['group']
 
     def __str__(self):
         return self.name
@@ -65,6 +67,7 @@ class WorkpieceType(models.Model):
     class Meta:
         verbose_name = 'Вид обрабатываемой детали'
         verbose_name_plural = 'Виды обрабатываемой детали'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -76,6 +79,7 @@ class ProcessingType(models.Model):
     class Meta:
         verbose_name = 'Вид обработки'
         verbose_name_plural = 'Виды обработок'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -87,6 +91,7 @@ class ApplicationArea(models.Model):
     class Meta:
         verbose_name = 'Область применения'
         verbose_name_plural = 'Области применения'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -111,6 +116,7 @@ class Instrument(models.Model):
     class Meta:
         verbose_name = 'Инструмент'
         verbose_name_plural = 'Инструменты'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -160,6 +166,7 @@ class RiggingType(models.Model):
     class Meta:
         verbose_name = 'Вид оснастки'
         verbose_name_plural = 'Виды оснасток'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -176,6 +183,7 @@ class Rigging(models.Model):
     class Meta:
         verbose_name = 'Оснастка'
         verbose_name_plural = 'Оснастки'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -226,6 +234,7 @@ class Manual(models.Model):
     class Meta:
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
+        ordering = ['name']
 
     def __str__(self):
         return self.name

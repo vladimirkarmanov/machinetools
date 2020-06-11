@@ -19,5 +19,4 @@ def get_rigging_list_by_search_query(search_query):
 
 
 def get_manual_list_by_search_query(search_query):
-    return Manual.objects.filter(Q(name__icontains=search_query) |
-                                 Q(file__name__icontains=search_query))
+    return Manual.objects.filter(name__icontains=search_query)

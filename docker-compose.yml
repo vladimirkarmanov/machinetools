@@ -5,7 +5,7 @@ services:
     container_name: web
     restart: always
     build: ./web
-    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --preload --workers 3
     volumes:
       - static_volume:/home/app/src/static
       - media_volume:/home/app/src/media

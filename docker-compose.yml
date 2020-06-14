@@ -5,12 +5,12 @@ services:
     container_name: web
     restart: always
     build: ./web
-    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --preload --workers 3
+    command: gunicorn backend.wsgi:application --bind :80 --preload --workers 3
     volumes:
       - static_volume:/home/app/src/static
       - media_volume:/home/app/src/media
     expose:
-      - 8000
+      - 80
     env_file: ./web/.env
     depends_on:
       - db
@@ -24,7 +24,7 @@ services:
       - static_volume:/home/app/src/static
       - media_volume:/home/app/src/media
     ports:
-      - 8000:80
+      - 80:80
     env_file: ./web/.env
     depends_on:
       - web

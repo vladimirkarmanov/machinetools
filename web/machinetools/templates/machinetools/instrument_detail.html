@@ -20,7 +20,10 @@
         {% include 'machinetools/includes/files-loop.html' %}
     </div>
 
-    <p class="mt-4"><b>Описание:</b> {{ object.description }}</p>
+    <div class="mt-4">
+        <b>Описание:</b>
+        {{ object.description|safe }}
+    </div>
 
 </div>
 {% endblock content %}

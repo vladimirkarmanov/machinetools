@@ -22,7 +22,10 @@
 
     {% include 'machinetools/includes/images-loop.html' %}
 
-    <p class="mt-4"><b>Описание:</b> {{ object.description }}</p>
+    <div class="mt-4">
+        <b>Описание:</b>
+        {{ object.description|safe }}
+    </div>
 
 </div>
 {% endblock content %}

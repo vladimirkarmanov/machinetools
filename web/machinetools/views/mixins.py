@@ -6,7 +6,6 @@ from machinetools.utils import get_objects_page
 class ListViewMixin:
     model = None
     template_name = None
-    default_order = None
     orders = None
     obj_per_page = 9
 

@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
@@ -7,7 +8,7 @@ from machinetools.utils import compress_image
 
 class StanokGroup(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Название')
-    description = models.TextField(max_length=2000, null=True, verbose_name='Описание')
+    description = RichTextUploadingField(config_name='default', blank=True, null=True, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Группа станков'
@@ -28,7 +29,7 @@ class Stanok(models.Model):
     rotation_frequency = models.FloatField(verbose_name='Частота вращения, Об/мин')
     spindle_cone = models.CharField(max_length=50, verbose_name='Конус шпинделя')
     torque = models.FloatField(verbose_name='Крутящий момент, Н*м')
-    description = models.TextField(max_length=2000, verbose_name='Описание')
+    description = RichTextUploadingField(config_name='default', blank=True, null=True, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Станок'
@@ -111,7 +112,7 @@ class Instrument(models.Model):
                                          on_delete=models.SET_NULL,
                                          null=True,
                                          verbose_name='Область применения')
-    description = models.TextField(max_length=2000, verbose_name='Описание')
+    description = RichTextUploadingField(config_name='default', blank=True, null=True, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Инструмент'
@@ -178,7 +179,7 @@ class Rigging(models.Model):
                                      on_delete=models.SET_NULL,
                                      null=True,
                                      verbose_name='Вид оснастки')
-    description = models.TextField(max_length=2000, null=True, verbose_name='Описание')
+    description = RichTextUploadingField(config_name='default', blank=True, null=True, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Оснастка'

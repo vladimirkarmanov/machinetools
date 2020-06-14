@@ -1,4 +1,12 @@
-{% for file in object.files.all %}
+{% load filename %}
+
+{% if object.files.count != 0 %}
 <b>Файлы:</b>
-<a href="{{ file.url }}">{{ file.name }}</a>
-{% endfor %}
+<ul style="list-style: none;">
+    {% for instance in object.files.all %}
+    <li>
+        <a href="{{ instance.file.url }}">{{ instance.file|filename }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

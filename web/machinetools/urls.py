@@ -1,13 +1,12 @@
 from django.urls import path
 
 from machinetools.views.ajax_view import calc_turning, calc_drilling, calc_boring, calc_milling
-
 from machinetools.views.views import (
     MainPageView, StanokListView, InstrumentListView,
     RiggingListView, StanokDetailView, InstrumentDetailView,
     RiggingDetailView, ManualListView, CalculatorView,
     TurningCalculatorView, DrillingCalculatorView, BoringCalculatorView,
-    MillingCalculatorView
+    MillingCalculatorView, ModernBladeProcessingDetailView, ModernBladeProcessingListView
 )
 
 urlpatterns = [
@@ -23,6 +22,9 @@ urlpatterns = [
     path('rigging/', RiggingListView.as_view(), name='rigging_list'),
 
     path('manual/', ManualListView.as_view(), name='manual_list'),
+
+    path('mbp/<slug:pk>/', ModernBladeProcessingDetailView.as_view(), name='mbp_detail'),
+    path('mbp/', ModernBladeProcessingListView.as_view(), name='mbp_list'),
 
     path('calculator/', CalculatorView.as_view(), name='calculator'),
     path('calculator/turning/', TurningCalculatorView.as_view(), name='turning'),

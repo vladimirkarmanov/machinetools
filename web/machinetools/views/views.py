@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, TemplateView, ListView
 
-from machinetools.models import Stanok, Instrument, Rigging, Manual
+from machinetools.models import Stanok, Instrument, Rigging, Manual, ModernBladeProcessing
 from machinetools.services import (
     get_stanok_list_by_search_query,
     get_instrument_list_by_search_query,
@@ -50,6 +50,12 @@ class ManualListView(ListViewMixin, ListView):
         return get_manual_list_by_search_query(search_query)
 
 
+class ModernBladeProcessingListView(ListViewMixin, ListView):
+    model = ModernBladeProcessing
+    template_name = 'machinetools/mbp_list.html'
+    orders = []
+
+
 class StanokDetailView(DetailView):
     model = Stanok
     template_name = 'machinetools/stanok_detail.html'
@@ -58,6 +64,11 @@ class StanokDetailView(DetailView):
 class InstrumentDetailView(DetailView):
     model = Instrument
     template_name = 'machinetools/instrument_detail.html'
+
+
+class ModernBladeProcessingDetailView(DetailView):
+    model = ModernBladeProcessing
+    template_name = 'machinetools/mbp_detail.html'
 
 
 class RiggingDetailView(DetailView):

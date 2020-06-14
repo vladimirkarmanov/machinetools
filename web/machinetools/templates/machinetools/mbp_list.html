@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Современные лезвийные обработки
+{% endblock title %}
+
+{% block content %}
+<section class="album py-5">
+    <div class="container mt-5">
+        <div class="row">
+            {% for object in page %}
+            <div class="col-6 mb-4">
+                <div class="card mb-4 box-shadow">
+                    <img src="{{ object.preview.url }}" height="400px" width="100%" class="card-img-top"
+                         alt="{{ object.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.name }}</h5>
+                        <a class="btn btn-info" href="{{ object.get_absolute_url }}">
+                            Подробнее <i class="far fa-arrow-alt-circle-right fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include 'machinetools/includes/pagination.html' %}
+
+{% endblock content %}

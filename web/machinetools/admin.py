@@ -5,7 +5,7 @@ from .models import (
     Instrument, ApplicationArea, ProcessingType,
     WorkpieceType, StanokGroup, Manual,
     Rigging, RiggingImage, RiggingType,
-    InstrumentFile, RiggingFile
+    InstrumentFile, RiggingFile, ModernBladeProcessing
 )
 
 
@@ -58,6 +58,12 @@ class RiggingAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description']
 
 
+class ModernBladeProcessingAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name', 'content']
+
+
 admin.site.register(StanokGroup)
 admin.site.register(Stanok, StanokAdmin)
 
@@ -70,3 +76,5 @@ admin.site.register(Manual)
 
 admin.site.register(RiggingType)
 admin.site.register(Rigging, RiggingAdmin)
+
+admin.site.register(ModernBladeProcessing, ModernBladeProcessingAdmin)

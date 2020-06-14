@@ -24,4 +24,4 @@ class ListViewMixin:
         return render(request, self.template_name, {'order': order, 'search_value': search_query, 'page': page})
 
     def get_queryset_by_search_query(self, search_query):
-        raise NotImplementedError
+        pass

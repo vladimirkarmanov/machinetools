@@ -239,3 +239,22 @@ class Manual(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ModernBladeProcessing(models.Model):
+    name = models.CharField(max_length=255, unique=True, verbose_name='Название')
+    preview = models.ImageField(upload_to='modern_blade_processing/',
+                                validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
+                                verbose_name='Превью')
+    content = RichTextUploadingField(config_name='default', verbose_name='Контент')
+
+    class Meta:
+        verbose_name = 'Современная лезвийная обработка'
+        verbose_name_plural = 'Современные лезвийные обработки'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('mbp_detail', kwargs={'pk': self.pk})

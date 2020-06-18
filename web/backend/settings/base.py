@@ -1,16 +1,6 @@
 import os
-import environ
 
-env = environ.Env()
-env.read_env(env_file='.env')
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-SECRET_KEY = env.str('SECRET_KEY')
-
-DEBUG = env.bool('DEBUG')
-
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+BASE_DIR = os.path.normpath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -56,17 +46,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PASSWORD'),
-        'HOST': env.str('DB_HOST'),
-        'PORT': env.int('DB_PORT')
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -89,11 +68,8 @@ LANGUAGES = [
 ]
 
 TIME_ZONE = 'Asia/Yekaterinburg'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Media and statifiles
